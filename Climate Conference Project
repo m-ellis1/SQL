@@ -156,3 +156,14 @@ LEFT JOIN vips
 ON events.event_id = vips.event
 GROUP BY events.event_name
 ORDER BY attendee_count DESC;
+
+--Find guests staying at Hyatt Downtown and have a dinner reservation in alphabetical order by last name
+SELECT vips.first_name, vips.last_name, hotels.hotel_name, reservations.dinner_rsvp
+FROM vips
+INNER JOIN reservations
+ON vips.member_id = reservations.member_id
+INNER JOIN hotels
+ON reservations.hotel = hotels.hotel_id
+WHERE hotel_name = 'Hyatt Downtown'
+AND dinner_rsvp = 1
+ORDER BY last_name;
