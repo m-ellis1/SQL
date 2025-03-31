@@ -134,7 +134,7 @@ INNER JOIN reservations
 ON vips.member_id = reservations.member_id
 WHERE dinner_rsvp = 1;
 
---Multiple JOINs in one query
+--Multiple JOINs in one query - find which guests are stay at which hotels
 SELECT vips.first_name, vips.last_name, hotels.hotel_name
 FROM vips
 INNER JOIN reservations
@@ -142,3 +142,9 @@ ON vips.member_id = reservations.member_id
 INNER JOIN hotels
 ON reservations.hotel = hotels.hotel_id
 ORDER BY hotel_name;
+
+--SELF JOIN - match feedback givers to feedback receivers
+SELECT vip1.first_name AS feedback_giver_first, vip1.last_name AS feedback_giver_last, vip2.first_name AS feedback_receiver_first, vip2.last_name AS feedback_receiver_last
+FROM vips AS vip1
+JOIN vips AS vip2
+ON vip1.provides_feedback_to = vip2.member_id;
