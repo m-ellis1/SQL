@@ -148,3 +148,11 @@ SELECT vip1.first_name AS feedback_giver_first, vip1.last_name AS feedback_giver
 FROM vips AS vip1
 JOIN vips AS vip2
 ON vip1.provides_feedback_to = vip2.member_id;
+
+--Count the number of VIPs attending each event and order by most attended
+SELECT events.event_name, COUNT (vips.member_id) AS attendee_count
+FROM events
+LEFT JOIN vips
+ON events.event_id = vips.event
+GROUP BY events.event_name
+ORDER BY attendee_count DESC;
